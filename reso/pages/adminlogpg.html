@@ -1,0 +1,241 @@
+<section class="admn-logpgSctn">
+</section>
+
+<style>
+   .admn-logpgSctn {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: clamp(20px, 5vw, 40px);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.adminLogpgCntr {
+    position: relative;
+    padding: clamp(15px, 4vw, 25px);
+    box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.6);
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 2vw, 12px);
+    width: clamp(280px, 80%, 400px);
+    background-color: #fff;
+}
+
+input {
+    width: 100%;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    padding: clamp(10px, 2.5vw, 16px) clamp(12px, 3vw, 24px);
+    border: 2px solid #e0e4e8;
+    border-radius: 12px;
+    outline: none;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    color: #333;
+}
+
+input::placeholder {
+    color: #a0a8b0;
+    font-weight: 400;
+}
+
+input:focus {
+    border-color: rgb(248, 176, 41);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px);
+}
+
+.submitAdminBtn,
+#submitAdmin {
+    width: clamp(80px, 25%, 120px);
+    padding: clamp(10px, 2vh, 14px);
+    background-color: yellowgreen;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    align-self: flex-end;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.submitAdminBtn:hover,
+#submitAdmin:hover {
+    background-color: orange;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+#arrowLeftAdm {
+    position: absolute;
+    height: clamp(30px, 6vh, 50px);
+    width: auto;
+    bottom: clamp(10px, 3vh, 20px);
+    left: clamp(10px, 3vw, 20px);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+    .adminLogpgCntr {
+        width: clamp(260px, 85%, 360px);
+    }
+}
+
+@media (max-width: 768px) {
+    .admn-logpgSctn {
+        padding: clamp(15px, 4vw, 30px);
+    }
+
+    .adminLogpgCntr {
+        width: clamp(240px, 90%, 340px);
+        padding: clamp(10px, 2.5vw, 15px);
+    }
+}
+
+@media (max-width: 480px) {
+    .adminLogpgCntr {
+        width: clamp(90%, 95vw, 320px);
+        padding: clamp(8px, 2vw, 12px);
+    }
+
+    input {
+        font-size: clamp(0.75rem, 2.3vw, 0.9rem);
+    }
+}
+
+@media (max-width: 360px) {
+    .adminLogpgCntr {
+        width: 95%;
+        padding: clamp(6px, 1.5vw, 10px);
+    }
+}
+
+@media (max-width: 896px) and (orientation: landscape) {
+    .adminLogpgCntr {
+        width: clamp(250px, 70%, 350px);
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .adminLogpgCntr {
+        box-shadow: 4px 2px 12px rgba(0, 0, 0, 0.7);
+    }
+}
+
+</style>
+
+<script>
+$(document).ready(function() {
+    const contentContainer = $('.content-cntr');
+    const admLogpgScnt = $('.admn-logpgSctn');
+
+    const loginCnt = $('<div>', {
+        class: 'adminLogpgCntr',
+        id: 'loginForm'
+    });
+
+    const arrowLeft = $('<img>', {
+        src:'./logo/icons/arrow-left.png',
+        alt:'',
+        class:'arrow-leftUp',
+        id:'arrowLeftAdm'
+    });
+
+    const labelCntr = $('<h2>', {
+        class: 'labelTitle',
+        text: 'Welcome Admin!'
+    });
+
+    const inputUser = $('<input>', {
+        class: 'userInput',
+        id: 'user',
+        placeholder: 'Username',
+        type: 'text'
+    });
+
+    const inputPass = $('<input>', {
+        class: 'passInput',
+        id: 'pass',
+        placeholder: 'Password',
+        type: 'password'
+    });
+
+    const submitAdmin = $('<input>', {
+        class: 'submitAdminBtn',
+        id: 'submitAdmin',
+        value: 'Login',
+        type: 'submit'
+    });
+
+    loginCnt.append(labelCntr, inputUser, inputPass, arrowLeft, submitAdmin);
+    admLogpgScnt.append(loginCnt);
+
+    async function loginUser(event) {
+        event.preventDefault();
+
+        const submitBtn = $('#submitAdmin');
+        const user_name = $('#user').val().trim();
+        const pass_word = $('#pass').val().trim();
+        const resultDiv = $('#result');
+
+        if (!user_name || !pass_word) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Opppss!',
+                text: 'Please enter a username or password'
+            });
+            // resultDiv.html('<p style="color: red;">Please enter both username and password.</p>');
+            return;
+        }
+
+
+        // Disable button and show loading state
+        submitBtn.prop('disabled', true).val('Logging in...');
+
+        try {
+            const response = await $.ajax({
+                url: '/api/users', // Changed to POST for security
+                type: 'POST',
+                data: JSON.stringify({ username: user_name, password: pass_word }),
+                contentType: 'application/json',
+                dataType: 'json'
+            });
+
+            // Handle successful authentication
+            if (response.data) {
+                resultDiv.html('<p style="color: green;">Login successful! Redirecting...</p>');
+                contentContainer.load(`${response.message}`, function(response, status, xhr) {
+                    if (status === 'error') {
+                        console.error('Error loading dashboard:', xhr.status, xhr.statusText);
+                        resultDiv.html('<p style="color: red;">Failed to load dashboard. Please try again.</p>');
+                    }
+                });
+            }
+        } catch (xhr) {
+            // Handle error response
+
+            Swal.fire({
+                icon: "warning",
+                title: "Something went wrong!", 
+                text: "Invalid input username or password"
+            });
+            const errorMessage = xhr.responseJSON?.error || 'An error occurred during login';
+            resultDiv.html(`<p style="color: red;">${errorMessage}</p>`);
+        } finally {
+            // Re-enable button
+            submitBtn.prop('disabled', false).val('Login');
+        }
+    }
+
+    // Attach submit event to form
+    $('#submitAdmin').on('click', loginUser);
+    arrowLeft.on('click', function(){
+        window.location.href = '/';
+    });
+});
+</script>

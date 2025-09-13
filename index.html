@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/libs/jquery.js"></script>
+    <script src="./js/libs/sweetalert2.js"></script>
+    <title>OSTI Helpdesk Panel</title>
+</head>
+<body>
+    <section class="optionsContainer">
+        <header>
+            <img src="./logo/OSTI-FINAL-LOGO.png" alt="" class="osti-logo" id="adminbtn">
+            <!-- <img src="./logo/icons/admin-profile.png" alt="" class="admin-nav" id="adminbtn"> -->
+        </header>
+        <div class="content-cntr">
+            <div class="labeltop">
+                <h2><b>Hi <i>there</i>!</b> How can we assist you today?</h2>
+                <p>Select an action. </p>
+            </div>
+            <div class="optnsCntr">
+                <div class="optn ct" id="createTicket">
+                    Create Ticket
+                </div>
+                <div class="optn ut" id="updateTicket">
+                    Track Ticket
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>761, Zosa Bldg, Dionisio Jakosalem St, Cebu City, 6000 Cebu, Philippines</p>
+            <p id="copyright"></p>
+        </footer>
+    </section>
+
+    <script>
+        $(document).ready(function(){
+            const createTicket = $('#createTicket');
+            const updateTicket = $('#updateTicket');
+            const adminpg = $('#adminbtn');
+            const contentContainer = $('.content-cntr');
+            const copyright = $('#copyright');
+            const footer = $('footer');
+            
+            if(createTicket){
+                createTicket.on('click', function(){
+                    contentContainer.load('./pages/create.html');
+                });
+            }
+
+            if(updateTicket){
+                updateTicket.on('click', function(){
+                    contentContainer.load('./pages/update.html');
+                });
+            }
+
+            if(adminpg.length){
+                let clickCount = 0;
+                adminpg.on('click', function(){
+                    clickCount++;
+                    if(clickCount >= 5){
+                        contentContainer.load('/adminlgpg');
+                        footer.hide();
+                    }
+                });
+            }
+
+            copyright.text (`© ${new Date().getFullYear()} Open Space Technologies Inc. All rights reserved.`);
+        });
+    </script>
+</body>
+</html>

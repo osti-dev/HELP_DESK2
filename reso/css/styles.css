@@ -1,0 +1,280 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FAF7F3;
+    color: #333;
+    overflow-x: hidden;
+}
+
+.optionsContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.optionsContainer header {
+    width: 100%;
+    height: clamp(50px, 8vh, 70px);
+    /* background-color: #BB3E00; */
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(10px, 3vw, 20px);
+    border-bottom: 4px solid #FA812F;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.optionsContainer header .osti-logo,
+.optionsContainer header .admin-nav {
+    height: 70%;
+    width: auto;
+    max-height: clamp(30px, 6vh, 40px);
+}
+
+.optionsContainer header .admin-nav {
+    height: 50%;
+}
+
+.admin-nav:hover {
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    border-radius: 12px;
+}
+
+.optionsContainer .content-cntr {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(15px, 4vw, 25px);
+}
+
+.labeltop {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(10px, 3vh, 15px) 0;
+}
+
+.labeltop p,
+.labeltop h2 {
+    margin: 8px 0;
+    font-family: sans-serif;
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    font-weight: 600;
+    color: #727D73;
+    text-align: center;
+}
+
+.labeltop b {
+    color: rgb(236, 155, 4);
+}
+
+.labeltop b i {
+    color: yellowgreen;
+}
+
+.optnsCntr {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(10px, 3vw, 20px);
+    padding: clamp(15px, 5vw, 30px);
+}
+
+.optionsContainer .content-cntr .optn {
+    width: clamp(180px, 30vw, 350px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    font-weight: 900;
+    font-size: clamp(2rem, 4.5vw, 2.4rem);
+    box-shadow: 4px 2px 12px rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    text-align: center;
+    padding: clamp(10px, 2vw, 32px);
+    background-color: white;
+}
+
+.optn:hover {
+    background-color: rgb(185, 236, 83);
+    color: #333;
+    transform: scale(1.05);
+}
+
+.optionsContainer footer {
+    width: 100%;
+    background-color: #BB3E00;
+    padding: clamp(15px, 3vh, 25px);
+    border-top: 4px solid #FA812F;
+    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(8px, 2vh, 12px);
+}
+
+.optionsContainer footer p {
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+    .optionsContainer header {
+        height: clamp(45px, 7vh, 60px);
+        padding: 0 clamp(8px, 2vw, 15px);
+    }
+
+    .optionsContainer header .osti-logo,
+    .optionsContainer header .admin-nav {
+        max-height: clamp(25px, 5vh, 35px);
+    }
+
+    .optnsCntr {
+        gap: clamp(8px, 2vw, 15px);
+        padding: clamp(10px, 4vw, 20px);
+    }
+
+    .optionsContainer .content-cntr .optn {
+        width: clamp(100px, 25vw, 160px);
+        font-size: clamp(0.9rem, 3vw, 1.3rem);
+        border-radius: 12px;
+    }
+
+    .optionsContainer footer {
+        padding: clamp(12px, 2.5vh, 20px);
+    }
+
+    .optionsContainer footer p {
+        font-size: clamp(0.75rem, 2.3vw, 0.95rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .optionsContainer header {
+        height: clamp(40px, 6vh, 50px);
+        padding: 0 clamp(6px, 1.5vw, 12px);
+    }
+
+    .optnsCntr {
+        flex-direction: column;
+        align-items: center;
+        padding: clamp(8px, 3vw, 15px);
+    }
+
+    .optionsContainer .content-cntr .optn {
+        width: clamp(80%, 90vw, 300px);
+        max-width: 300px;
+        padding: clamp(8px, 2vw, 12px);
+        border-radius: 12px;
+    }
+
+    .optionsContainer footer {
+        padding: clamp(10px, 2vh, 15px);
+    }
+
+    .optionsContainer footer p {
+        font-size: clamp(0.7rem, 2.2vw, 0.9rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .optionsContainer header {
+        height: clamp(35px, 5vh, 45px);
+        padding: 0 clamp(5px, 1.2vw, 10px);
+    }
+
+    .optnsCntr{
+        gap: clamp(10px, 3vw, 20px);
+    }
+
+    .optionsContainer .content-cntr .optn {
+        width: clamp(90%, 95vw, 280px);
+        font-size: clamp(2rem, 2.8vw, 1.1rem);
+        border-radius: 12px;
+    }
+
+    .labeltop p,
+    .labeltop h2 {
+        font-size: clamp(1rem, 3.5vw, 1.5rem);
+    }
+
+    .optionsContainer footer {
+        padding: clamp(8px, 1.5vh, 12px);
+    }
+
+    .optionsContainer footer p {
+        font-size: clamp(0.65rem, 2vw, 0.85rem);
+    }
+}
+
+@media (max-width: 360px) {
+    .optnsCntr {
+        padding: clamp(5px, 2vw, 10px);
+        gap: clamp(15px, 3vw, 20px);
+    }
+
+    .optionsContainer .content-cntr .optn {
+        width: 95%;
+        font-size: clamp(2rem, 2.5vw, 1rem);
+        border-radius: 12px;
+    }
+
+    .optionsContainer footer {
+        padding: clamp(6px, 1.2vh, 10px);
+    }
+
+    .optionsContainer footer p {
+        font-size: clamp(0.6rem, 1.8vw, 0.8rem);
+    }
+}
+
+@media (max-width: 896px) and (orientation: landscape) {
+    .optnsCntr {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: clamp(8px, 2vh, 12px);
+    }
+
+    .optionsContainer .content-cntr .optn {
+        width: clamp(100px, 20vw, 140px);
+        font-size: clamp(0.8rem, 2.5vw, 1rem);
+        border-radius: 12px;
+    }
+
+    .optionsContainer footer {
+        padding: clamp(8px, 1.5vh, 12px);
+    }
+
+    .optionsContainer footer p {
+        font-size: clamp(0.7rem, 2vw, 0.9rem);
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .optionsContainer .content-cntr .optn {
+        box-shadow: 4px 2px 14px rgba(0, 0, 0, 0.8);
+        border-radius: 12px;
+    }
+
+    .optionsContainer footer {
+        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.4);
+    }
+}

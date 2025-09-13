@@ -1,0 +1,283 @@
+<section class="createt-section">
+        <div class="form-cntr">
+            <h2>Fill the details for the support <strong>Ticket Reference Number</strong>:</h2>
+            <form id="requestForm" class="create-ticket-form">
+              <input type="text" id="companyName" name="companyName" placeholder="Input company name" required>
+                <input type="text" id="name" name="name" placeholder="Input your name" required>
+                <input type="email" id="email" name="email" placeholder="Input your email" required>
+                <input type="text" id="contactNumber" name="contactNumber" placeholder="Input your contact number" maxlength="11" required>
+                <input type="text" id="address" name="companyAddress" placeholder="Input company address" required>
+                <label for="date" id="labelDate">Select schedule:</label>
+                <input type="date" id="date" name="date" placeholder="Input date" required>
+                <input type="text" id="subject" name="subject" placeholder="Input subject:(ex: Printer not working ,etc.)" required>
+                <label for="description">Description:</label>
+                <textarea name="description" id="description" placeholder="How can we help you? Type your concern..." required></textarea>
+                <img src="./logo/icons/arrow-left.png" alt=""  class="arrow-left">
+                <input type="submit" value="Submit" id="submitRequest">
+            </form>
+        </div>
+    </section>
+    <script src="./js/clientside/request.js"></script>
+
+<style> 
+.createt-section {
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background-color: transparent;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: clamp(15px, 4vw, 25px);
+}
+
+.createt-section .form-cntr {
+    position: relative;
+    height: auto;
+    width: clamp(400px, 75%, 600px);
+    padding: clamp(12px, 3vw, 20px);
+    box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.6);
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    background-color: #fff;
+}
+
+.createt-section .form-cntr h2 {
+    background-color: rgb(235, 235, 235);
+    /* color: #5c5b5b; */
+    font-size: clamp(1.4rem, 1vw, 1.8rem);
+    text-align: center;
+    margin-bottom: clamp(10px, 2.5vh, 15px);
+    border-bottom: 4px solid #FA812F;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+
+}
+
+.createt-section .form-cntr .create-ticket-form {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 2vw, 12px);
+    width: 100%;
+    padding: clamp(12px, 3vw, 20px);
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: clamp(10px, 2.5vw, 16px) clamp(12px, 3vw, 24px);
+    border: 2px solid #e0e4e8;
+    border-radius: 12px;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    outline: none;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    color: #333;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #a0a8b0;
+    font-weight: 400;
+}
+
+input:focus,
+textarea:focus {
+    border-color: rgb(248, 176, 41);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px);
+}
+
+label {
+    font-size: clamp(0.9rem, 2.8vw, 1.1rem);
+    margin-top: 5px;
+    color: #333;
+}
+
+#description {
+    height: clamp(80px, 20vh, 120px);
+    resize: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#submitRequest {
+    background-color: yellowgreen;
+    width: clamp(100px, 30%, 150px);
+    padding: clamp(10px, 2vh, 14px);
+    height: clamp(36px, 9vh, 44px); /* Explicit height to match .arrow-left */
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    align-self: flex-end;
+    border: none;
+    border-radius: 12px;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+#submitRequest:hover {
+    background-color: orange;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.arrow-left {
+    position: absolute;
+    height: clamp(36px, 9vh, 44px); /* Matches #submitRequest height */
+    width: auto;
+    bottom: clamp(20px, 5vh, 30px); /* Matches .arrow-leftUp */
+    left: clamp(20px, 5vw, 30px); /* Matches .arrow-leftUp */
+    z-index: 10; /* Ensure visibility */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+    .createt-section .form-cntr {
+        width: clamp(280px, 85%, 450px);
+        padding: clamp(10px, 2.5vw, 15px);
+    }
+
+    input,
+    textarea {
+        font-size: clamp(0.85rem, 2.8vw, 1rem);
+    }
+
+    .arrow-left {
+        height: clamp(32px, 8vh, 40px); /* Matches #submitRequest */
+        bottom: clamp(18px, 4.5vh, 28px); /* Matches .arrow-leftUp */
+        left: clamp(18px, 4.5vw, 28px); /* Matches .arrow-leftUp */
+    }
+
+    #submitRequest {
+        width: clamp(90px, 25%, 140px);
+        height: clamp(32px, 8vh, 40px); /* Adjusted to match .arrow-left */
+    }
+}
+
+@media (max-width: 768px) {
+    .createt-section .form-cntr {
+        width: clamp(260px, 90%, 400px);
+        padding: clamp(8px, 2vw, 12px);
+    }
+
+    .create-ticket-form {
+        padding: clamp(10px, 2.5vw, 15px);
+    }
+
+    input,
+    textarea {
+        font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+    }
+
+    #description {
+        height: clamp(70px, 18vh, 100px);
+    }
+
+    .arrow-left {
+        height: clamp(28px, 7vh, 36px); /* Matches #submitRequest */
+        bottom: clamp(15px, 4vh, 25px); /* Matches .arrow-leftUp */
+        left: clamp(15px, 4vw, 25px); /* Matches .arrow-leftUp */
+    }
+
+    #submitRequest {
+        width: clamp(80px, 30%, 130px);
+        height: clamp(28px, 7vh, 36px); /* Adjusted to match .arrow-left */
+    }
+}
+
+@media (max-width: 480px) {
+    .createt-section {
+        padding: clamp(8px, 2vw, 15px);
+    }
+
+    .createt-section .form-cntr {
+        width: clamp(90%, 95vw, 350px);
+        padding: clamp(6px, 1.5vw, 10px);
+    }
+
+    input,
+    textarea {
+        font-size: clamp(0.75rem, 2.3vw, 0.9rem);
+    }
+
+    .arrow-left {
+        height: clamp(24px, 6vh, 32px); /* Matches #submitRequest */
+        bottom: clamp(12px, 3.5vh, 20px); /* Matches .arrow-leftUp */
+        left: clamp(12px, 3.5vw, 20px); /* Matches .arrow-leftUp */
+    }
+
+    #submitRequest {
+        width: clamp(70px, 35%, 120px);
+        height: clamp(24px, 6vh, 32px); /* Adjusted to match .arrow-left */
+    }
+}
+
+@media (max-width: 360px) {
+    .createt-section .form-cntr {
+        width: 95%;
+        padding: clamp(5px, 1.2vw, 8px);
+    }
+
+    input,
+    textarea {
+        font-size: clamp(0.7rem, 2.2vw, 0.85rem);
+    }
+
+    .arrow-left {
+        height: clamp(20px, 5vh, 28px); /* Matches #submitRequest */
+        bottom: clamp(10px, 3vh, 18px); /* Matches .arrow-leftUp */
+        left: clamp(10px, 3vw, 18px); /* Matches .arrow-leftUp */
+    }
+
+    #submitRequest {
+        width: clamp(50px, 35%, 80px);
+        height: clamp(20px, 5vh, 28px); /* Adjusted to match .arrow-left */
+        font-size: clamp(0.7rem, 2.2vw, 0.85rem);
+    }
+}
+
+@media (max-width: 896px) and (orientation: landscape) {
+    .createt-section .form-cntr {
+        width: clamp(250px, 70%, 400px);
+    }
+
+    .create-ticket-form {
+        padding: clamp(8px, 2vh, 12px);
+    }
+
+    .arrow-left {
+        height: clamp(24px, 6vh, 32px); /* Matches #submitRequest */
+        bottom: clamp(12px, 3vh, 20px); /* Matches .arrow-leftUp */
+        left: clamp(12px, 3vw, 20px); /* Matches .arrow-leftUp */
+    }
+
+    #submitRequest {
+        width: clamp(60px, 25%, 100px);
+        height: clamp(24px, 6vh, 32px); /* Adjusted to match .arrow-left */
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .createt-section .form-cntr {
+        box-shadow: 4px 2px 12px rgba(0, 0, 0, 0.7);
+    }
+
+    #submitRequest {
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    #submitRequest:hover {
+        box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.6);
+    }
+}
+    </style>
+
+    <script>
+        $(document).ready(function(){
+            const backButton = $('.arrow-left');
+            backButton.on('click', function(){
+                window.location.href = '/';
+            });
+        });
+    </script>

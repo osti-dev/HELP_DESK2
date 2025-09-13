@@ -1,0 +1,716 @@
+<section class="dashboard-section">
+    <div class="dashboard-header">
+        <div class="status-container">
+            <div class="status-button" id="openBtn">Open Tickets</div>
+            <div class="status-button" id="inProgressBtn">In-progress</div>
+            <div class="status-button" id="closedBtn">Closed</div>
+        </div>
+        <div class="all-container">
+            <div class="all-button" id="allBtn">ALL</div>
+        </div>
+        
+        <div class="search-container">
+            <input type="search" class="search-field" placeholder="search" id="search">
+        </div>
+
+        <div class="priority-container">
+            <div class="priority-button" id="lowBtn">Low</div>
+            <div class="priority-button" id="mediumBtn">Medium</div>
+            <div class="priority-button" id="highBtn">High</div>
+            <div class="priority-button" id="criticalBtn">Critical</div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <div class="table-wrapper">
+            <table id="dataTable" class="data-grid">
+                <thead>
+                    <tr>
+                        <th>TRN (ID)</th>
+                        <th>Status</th>
+                        <th>Company Name</th>
+                        <th>Subject</th>
+                        <th>Description</th>
+                        <th>Schedule</th>
+                        <th>Priority</th>
+                        <th>Category</th>
+                        <th>Level #</th>
+                        <th>Action Taken</th>
+                        <th>Resolution Notes</th>
+                        <th>Updated at</th>
+                        <th>Assigned Team</th>
+                        <th>Team Leader</th>
+                        <th>Assigned Person</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact #</th>
+                        <th>Address</th>
+                        <th>Created at</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal-overlay" style="display: none;">
+        <div class="edit-modal">
+            <h2>Edit Details</h2>
+            <form id="requestForm" class="update-ticket-form">
+                <p class="form-group"><strong>Ticket RN:</strong> <span id="ticketId"></span></p>
+
+                <div class="form-group">
+                    <label for="editStatus">Status:</label>
+                    <select id="editStatus" name="status" required>
+                        <option value="OPEN">Open</option>
+                        <option value="IN-PROGRESS">In-progress</option>
+                        <option value="CLOSED">Closed</option>
+                    </select>
+                </div>
+
+                <p class="form-group"><strong>Company Name:</strong> <span id="companyName"></span></p>
+                <p class="form-group"><strong>Requestor Name:</strong> <span id="requestorName"></span></p>
+                <p class="form-group"><strong>Subject:</strong> <span id="subject"></span></p>
+                <p class="form-group"><strong>Description:</strong> <span id="description"></span></p>
+                <p class="form-group"><strong>Schedule:</strong> <span id="schedule"></span></p>
+
+                <div class="form-group">
+                    <label for="editLevel">Level: </label>
+                    <select name="priority" id="editLevelNumber" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="editLevelAction">Level Action: </label>
+                        <textarea name="levelAction" id="editLevelAction"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="editLevelAttempt">Level Attempt: </label>
+                        <textarea name="levelAttempt" id="editLevelAttempt"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="editPriority">Priority:</label>
+                    <select id="editPriority" name="priority" required>
+                        <option value="LOW">Low</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="HIGH">High</option>
+                        <option value="CRITICAL">Critical</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="editCategory">Category:</label>
+                    <select id="editCategory" name="category" required>
+                        <option value="HARDWARE">Hardware</option>
+                        <option value="SOFTWARE">Software</option>
+                        <option value="OTHERS">Others</option>
+                    </select>
+                </div>
+
+                <p class="form-group"><strong>Address:</strong> <span id="address"></span></p>
+                <p class="form-group"><strong>Contact Number:</strong> <span id="contactNumber"></span></p>
+
+                <div class="form-group">
+                    <label for="editAssignedTeam">Assigned Team:</label>
+                    <!-- <input type="text" id="editAssignedTeam" name="assignedTeam" required> -->
+                      <select name="assignedTeam" id="editAssignedTeam">
+                        <option value="Technical Support">Technical Support</option>
+                        <option value="Software Development">Software Development</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Sales">Sales</option>
+                        <option value="Management">Management</option>
+                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="editTeamLeader">Team Leader:</label>
+                    <input type="text" id="editTeamLeader" name="teamLeader" required>
+                </div>
+
+                <p class="form-group"><strong>Email:</strong> <span id="email"></span></p>
+
+                <div class="form-group">
+                    <label for="editAssignedPerson">Assigned Person:</label>
+                    <input type="text" id="editAssignedPerson" name="assignedPerson" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editCreatedAt">Created At:</label>
+                    <input type="text" id="editCreatedAt" name="createdAt" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="editUpdatedAt">Updated At:</label>
+                    <input type="text" id="editUpdatedAt" name="updatedAt" readonly>
+                </div>
+
+                <div class="form-group form-buttons">
+                    <input type="submit" value="Update" id="submitUpdate">
+                    <input type="button" value="Escalate" id="escalate">
+                    <input type="button" value="Cancel" id="cancelUpdate">
+                </div>
+                </form>
+            </div>
+    </div>
+</section>
+
+<style>
+.dashboard-section {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    scrollbar-width: none;
+    /* padding: clamp(10px, 2vw, 20px); */
+}
+
+.dashboard-section::-webkit-scrollbar {
+    display: none;
+}
+
+.dashboard-section .dashboard-header {
+    position: relative;
+    height: clamp(60px, 10vh, 90px);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0 clamp(8px, 2vw, 15px);
+    align-items: center;
+}
+
+.dashboard-section .dashboard-header .status-container,
+.dashboard-section .dashboard-header .priority-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: clamp(6px, 1.5vw, 10px);
+    height: 100%;
+    /* width: clamp(180px, 30%, 280px); */
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-section .dashboard-header .all-container {
+    position: relative;
+    height: 100%;
+    width: clamp(50px, 5%, 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-section .dashboard-header .status-container .status-button,
+.dashboard-section .dashboard-header .priority-container .priority-button,
+.dashboard-section .dashboard-header .all-container .all-button {
+    position: relative;
+    height: clamp(30px, 50%, 40px);
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(8px, 2vw, 12px);
+    border-radius: 12px;
+    background-color: #F8B259;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out;
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+    cursor: pointer;
+}
+
+#lowBtn {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+#mediumBtn {
+    background-color: #FFC107;
+}
+
+#highBtn {
+    background-color: #FF9800;
+}
+
+#criticalBtn {
+    background-color: red;
+    color: #fff;
+}
+
+#allBtn {
+    background-color: yellowgreen;
+    color: #fff;
+}
+
+.priority-button:active,
+.status-button:active,
+.all-button:active {
+    transform: scale(0.8);
+}
+
+.dashboard-section .dashboard-header .search-container {
+    position: relative;
+    height: 100%;
+    /* width: clamp(200px, 45%, 400px); */
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-field {
+    background-image: url('../logo/icons/glass.png');
+    background-position: right clamp(6px, 2vw, 10px) center;
+    background-repeat: no-repeat;
+    background-size: clamp(16px, 4vw, 20px);
+    padding: clamp(6px, 1.5vw, 8px) clamp(8px, 2vw, 12px) clamp(6px, 1.5vw, 8px) clamp(30px, 8vw, 40px);
+    width: 100%;
+    height: clamp(30px, 8vh, 36px);
+    border: 2px solid gray;
+    border-radius: 12px;
+    outline: none;
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.search-field:focus {
+    border: 2px solid orange;
+    box-shadow: 0 0 5px rgba(255, 165, 0, 0.3);
+}
+
+.modal-overlay {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 50;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+}
+
+.modal-overlay .edit-modal {
+    width: clamp(320px, 85vw, 960px);
+    max-height: 90vh;
+    padding: clamp(16px, 4vw, 24px);
+    border-radius: 16px;
+    background: linear-gradient(145deg, #ffffff, #f8fafc);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.update-ticket-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(12px, 2.5vw, 16px);
+    padding: clamp(16px, 3vw, 24px);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    gap: clamp(6px, 1.5vw, 8px);
+}
+
+label {
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    font-weight: 500;
+    color: #1f2937;
+    margin-bottom: clamp(6px, 1.5vw, 8px);
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: clamp(10px, 2.5vw, 12px);
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: clamp(0.9rem, 2.3vw, 1rem);
+    background-color: #f9fafb;
+    transition: all 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: orange;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+#submitUpdate,
+#escalate,
+#cancelUpdate {
+    width: clamp(120px, 35%, 160px);
+    padding: clamp(10px, 2.5vh, 14px);
+    border: none;
+    border-radius: 8px;
+    font-size: clamp(0.9rem, 2.3vw, 1rem);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#submitUpdate {
+    background-color: #a4d10f;
+    color: white;
+}
+
+#escalate{
+    background-color: #F97A00;
+    color: white;
+}
+
+#cancelUpdate {
+    background-color: #6b7280;
+    color: white;
+}
+
+#submitUpdate:hover {
+    background-color: #78C841;
+    transform: translateY(-1px);
+}
+
+#escalate:hover{
+    background-color: #e2873d;
+    transform: translateY(-1px);
+}
+
+#cancelUpdate:hover {
+    background-color: #4b5563;
+    transform: translateY(-1px);
+}
+
+#submitUpdate:active,
+#escalate:active,
+#cancelUpdate:active {
+    transform: translateY(0);
+}
+
+@media (prefers-color-scheme: dark) {
+    .modal-overlay .edit-modal {
+        background: linear-gradient(145deg, #1f2937, #111827);
+        color: #f3f4f6;
+    }
+
+    label {
+        color: #d1d5db;
+    }
+
+    input,
+    textarea,
+    select {
+        background-color: #374151;
+        border-color: #4b5563;
+        color: #f3f4f6;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        border-color: orange;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+    }
+}
+
+.table-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: clamp(12px, 3vw, 20px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.table-container .table-wrapper {
+    position: relative;
+    width: 100%;
+    max-height: clamp(300px, 80vh, 600px);
+    overflow-x: auto;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.data-grid {
+    position: relative;
+    width: auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.data-grid thead {
+    position: sticky;
+    top: 0;
+    background-color: yellowgreen;
+    z-index: 10;
+}
+
+.data-grid th,
+.data-grid td {
+    padding: clamp(8px, 2vw, 12px);
+    text-align: left;
+    font-size: clamp(0.8rem, 2.5vw, 1.1rem);
+    border: 1px solid #ddd;
+    white-space: nowrap; /* Prevent text wrapping by default */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+}
+
+.data-grid th {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Column-specific widths for potentially lengthy content */
+.data-grid th:nth-child(3), .data-grid td:nth-child(3) { /* Company Name */
+    min-width: 200px;
+}
+.data-grid th:nth-child(4), .data-grid td:nth-child(4) { /* Subject */
+    min-width: 180px;
+}
+.data-grid th:nth-child(5), .data-grid td:nth-child(5) { /* Description */
+    min-width: 300px;
+    white-space: normal; /* Allow wrapping for Description */
+}
+.data-grid th:nth-child(13), .data-grid td:nth-child(13) { /* Assigned Team */
+    min-width: 150px;
+}
+.data-grid th:nth-child(14), .data-grid td:nth-child(14) { /* Team Leader */
+    min-width: 150px;
+}
+.data-grid th:nth-child(15), .data-grid td:nth-child(15) { /* Assigned Person */
+    min-width: 150px;
+}
+.data-grid th:nth-child(16), .data-grid td:nth-child(16) { /* Name */
+    min-width: 150px;
+}
+.data-grid th:nth-child(17), .data-grid td:nth-child(17) { /* Email */
+    min-width: 200px;
+}
+.data-grid th:nth-child(19), .data-grid td:nth-child(19) { /* Address */
+    min-width: 220px;
+    white-space: normal; /* Allow wrapping for Address */
+}
+
+/* Narrower columns for shorter content */
+.data-grid th:nth-child(1), .data-grid td:nth-child(1) { /* TRN (ID) */
+    min-width: 100px;
+}
+.data-grid th:nth-child(2), .data-grid td:nth-child(2) { /* Status */
+    min-width: 120px;
+}
+.data-grid th:nth-child(6), .data-grid td:nth-child(6) { /* Schedule */
+    min-width: 130px;
+}
+.data-grid th:nth-child(7), .data-grid td:nth-child(7) { /* Priority */
+    min-width: 100px;
+}
+.data-grid th:nth-child(8), .data-grid td:nth-child(8) { /* Category */
+    min-width: 120px;
+}
+.data-grid th:nth-child(9), .data-grid td:nth-child(9) { /* Level # */
+    min-width: 80px;
+}
+.data-grid th:nth-child(10), .data-grid td:nth-child(10) { /* Level Action */
+    min-width: 200px;
+}
+.data-grid th:nth-child(11), .data-grid td:nth-child(11) { /* Level Attempt */
+    min-width: 200px;
+}
+.data-grid th:nth-child(12), .data-grid td:nth-child(12) { /* Updated at */
+    min-width: 130px;
+}
+.data-grid th:nth-child(18), .data-grid td:nth-child(18) { /* Contact # */
+    min-width: 130px;
+}
+.data-grid th:nth-child(20), .data-grid td:nth-child(20) { /* Created at */
+    min-width: 130px;
+}
+
+.data-grid tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.data-grid tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+    .dashboard-section .dashboard-header .status-container,
+    .dashboard-section .dashboard-header .priority-container {
+        width: clamp(120px, 20%, 200px);
+    }
+
+    .dashboard-section .dashboard-header .all-container {
+        width: clamp(40px, 5%, 80px);
+    }
+
+    .dashboard-section .dashboard-header .search-container {
+        width: clamp(180px, 40%, 350px);
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-section .dashboard-header {
+        flex-direction: column;
+        height: auto;
+        padding: clamp(10px, 2.5vw, 15px);
+        gap: clamp(8px, 2vh, 12px);
+    }
+
+    .dashboard-section .dashboard-header .status-container,
+    .dashboard-section .dashboard-header .priority-container,
+    .dashboard-section .dashboard-header .search-container,
+    .dashboard-section .dashboard-header .all-container {
+        width: 100%;
+    }
+
+    .modal-overlay .edit-modal {
+        width: clamp(260px, 90%, 700px);
+    }
+
+    .update-ticket-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-section {
+        padding: clamp(8px, 2vw, 12px);
+    }
+
+    .search-field {
+        font-size: clamp(0.7rem, 2.2vw, 0.9rem);
+    }
+
+    .modal-overlay .edit-modal {
+        width: clamp(90%, 95vw, 350px);
+    }
+
+    .data-grid th,
+    .data-grid td {
+        font-size: clamp(0.7rem, 2.2vw, 0.9rem);
+    }
+}
+
+@media (max-width: 360px) {
+    .dashboard-section .dashboard-header .status-container .status-button,
+    .dashboard-section .dashboard-header .priority-container .priority-button,
+    .dashboard-section .dashboard-header .all-container .all-button {
+        font-size: clamp(0.65rem, 2vw, 0.8rem);
+    }
+
+    .modal-overlay .edit-modal {
+        width: 95%;
+    }
+}
+
+@media (max-width: 896px) and (orientation: landscape) {
+    .dashboard-section .dashboard-header {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .dashboard-section .dashboard-header .status-container,
+    .dashboard-section .dashboard-header .priority-container {
+        width: clamp(100px, 20%, 150px);
+    }
+
+    .modal-overlay .edit-modal {
+        width: clamp(250px, 70%, 600px);
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .modal-overlay .edit-modal,
+    .table-container .table-wrapper {
+        box-shadow: 4px 2px 12px rgba(0, 0, 0, 0.7);
+    }
+}
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../js/clientside/dashboard.js"></script>
+<script>
+    $(document).ready(function() {
+        fetchAllData();
+        updateStatusCounts();
+
+        $('#dataTable tbody').on('click', 'tr[data-ticket-id]', function() {
+            const ticketId = $(this).data('ticket-id');
+            openEditPopup(ticketId);
+        });
+
+        $('#search').on('keyup', debounce(searchKeyTerm, 300));
+        // $('#search').on('keyup', searchKeyTerm);
+
+        function debounce(func, wait) {
+            let timeout;
+            return function (...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        // Bind click event to display header navigation buttons
+        $('#openBtn').on('click', function() {
+            fetchDataBasedOnStatus('OPEN');
+        });
+
+        $('#inProgressBtn').on('click', function() {
+            fetchDataBasedOnStatus('IN-PROGRESS');
+        });
+
+        $('#closedBtn').on('click', function() {
+            fetchDataBasedOnStatus('CLOSED');
+        });
+
+        $('#allBtn').on('click', function(){
+            fetchAllData();
+        });
+
+        $('#lowBtn').on('click', function() {
+            fetchDataBasedOnPriority('LOW');
+        });
+
+        $('#mediumBtn').on('click', function() {
+            fetchDataBasedOnPriority('MEDIUM');
+        });
+
+        $('#highBtn').on('click', function() { 
+            fetchDataBasedOnPriority('HIGH');
+        });
+
+        $('#criticalBtn').on('click', function() {
+            fetchDataBasedOnPriority('CRITICAL');
+        });
+    });
+</script>
